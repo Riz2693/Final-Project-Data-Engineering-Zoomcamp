@@ -30,16 +30,9 @@ jobs:
       # 4. Menginstal alat Bruin CLI & Mendaftarkannya ke Sistem
       - name: Install Bruin
         run: |
-          # Download binary Bruin yang asli
           curl -L https://github.com -o bruin
-
-          # Berikan izin eksekusi
           chmod +x bruin
-
-          # Pindahkan ke folder sistem agar bisa dipanggil di mana saja
           sudo mv bruin /usr/local/bin/
-
-          # Cek apakah instalasi berhasil
           bruin --version
 
       # 5. Mengeksekusi Pipa Data secara End-to-End!
