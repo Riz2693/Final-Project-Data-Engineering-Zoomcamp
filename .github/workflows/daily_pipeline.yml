@@ -1,0 +1,41 @@
+name: Karawang Env Pipeline
+
+# Kapan jadwal ini berjalan?
+on:
+  schedule:
+    - cron: "0 0 * * *" # Berjalan setiap jam 00:00 UTC (sekitar jam 7 pagi WIB)
+  workflow_dispatch: # Memunculkan tombol "Run Workflow" agar kamu bisa jalankan manual kapan saja
+
+jobs:
+  run-data-pipeline:
+    runs-on: ubuntu-latest # Meminjam server Linux gratis dari GitHub
+
+    steps:
+      # 1. Mengambil kodemu dari GitHub
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # 2. Menyiapkan Python (Karena Ingestion kita pakai Python)
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      # 3. Memberikan akses Google Cloud ke GitHub
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: "${{ secrets.GCP_CREDENTIALS }}"
+
+      # 4. Menginstal alat Bruin CLI
+      - name: Install Bruin CLI
+        run: bash -c "$(curl -fsSL https://bruin.dev/install)"
+
+      # 5. Mengeksekusi Pipa Data secara End-to-End!
+      - name: Run Bruin Pipeline
+        run: |
+          # Menyimpan credential gcp yang disuntikkan GitHub ke tempat yang dicari Bruin
+          export GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_GHA_CREDS_PATH
+
+          # Eksekusi Bruin
+          bruin run

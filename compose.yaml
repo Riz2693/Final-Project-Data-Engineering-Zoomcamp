@@ -1,0 +1,22 @@
+version: '3.8' # Versi format file docker-compose
+
+services:
+  de-workspace: # Nama layanan/mesin kita
+    build: .    # Menyuruh Docker: "Baca file bernama 'Dockerfile' di folder ini (.) untuk membangun mesinnya"
+    container_name: zoomcamp_final_project # Nama spesifik kontainer agar mudah dicari
+
+    volumes:
+      # Sinkronisasi folder: Hubungkan folder lokal laptop (.) ke folder /workspace di dalam Docker.
+      # Jadi, kalau kamu ngedit kode di VS Code, filenya otomatis berubah juga di dalam Docker.
+      - .:/workspace
+
+      # INI PENTING: Meminjamkan "mesin pembuat kontainer" laptopmu ke dalam Docker ini.
+      # Karena Bruin butuh membuat Docker kecil lagi untuk menjalankan Python (Docker-in-Docker).
+      - /var/run/docker.sock:/var/run/docker.sock
+
+    environment:
+      # Menyimpan variabel rahasia. Ini memberi tahu semua aplikasi di dalam Docker (seperti Python/Bruin)
+      # di mana letak kunci rahasia Google Cloud kamu berada.
+      - GOOGLE_APPLICATION_CREDENTIALS=/workspace/final-project-zoomcamp-493910-fc0f9dec7751.json
+
+    tty: true # Menjaga agar sistem Linux ini tetap hidup dan tidak langsung mati setelah dinyalakan.
