@@ -27,9 +27,12 @@ jobs:
         with:
           credentials_json: "${{ secrets.GCP_CREDENTIALS }}"
 
-      # 4. Menginstal alat Bruin CLI
+      # 4. Menginstal alat Bruin CLI & Mendaftarkannya ke Sistem
       - name: Install Bruin CLI
-        run: bash -c "$(curl -fsSL https://bruin.dev/install)"
+        run: |
+          bash -c "$(curl -fsSL https://bruin.dev/install)"
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+          echo "$HOME/.bruin/bin" >> $GITHUB_PATH
 
       # 5. Mengeksekusi Pipa Data secara End-to-End!
       - name: Run Bruin Pipeline
