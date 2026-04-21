@@ -30,9 +30,11 @@ jobs:
       # 4. Menginstal alat Bruin CLI & Mendaftarkannya ke Sistem
       - name: Install Bruin
         run: |
-          curl -L https://github.com -o bruin
-          chmod +x bruin
-          sudo mv bruin /usr/local/bin/
+          curl -LsSf https://getbruin.com/install/cli | bash
+          # Memindahkan binary ke folder sistem agar masuk ke PATH secara permanen
+          sudo mv $HOME/.bruin/bin/bruin /usr/local/bin/bruin
+
+
           bruin --version
 
       # 5. Mengeksekusi Pipa Data secara End-to-End!
