@@ -1,4 +1,4 @@
-.bruin.yml
+.bruin.local.yml
 *.json
 logs/runs
 logs/*.log
