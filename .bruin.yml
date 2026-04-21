@@ -5,6 +5,6 @@ environments:
     connections:
       google_cloud_platform:
         - name: bq-default
-          service_account_file: ""
+          use_application_default_credentials: true
           project_id: "final-project-zoomcamp-493910"
           location: "asia-southeast2"
