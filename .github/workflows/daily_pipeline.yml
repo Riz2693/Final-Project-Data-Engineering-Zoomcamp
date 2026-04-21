@@ -34,7 +34,6 @@ jobs:
           # Memindahkan binary ke folder sistem agar masuk ke PATH secara permanen
           sudo mv $HOME/.bruin/bin/bruin /usr/local/bin/bruin
 
-
           bruin --version
 
       # 5. Mengeksekusi Pipa Data secara End-to-End!
