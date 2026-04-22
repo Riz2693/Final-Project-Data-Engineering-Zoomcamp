@@ -73,6 +73,8 @@ Bruin handles the Python dependency management automatically in isolated environ
 bruin run --start-date ... --end-date ...
 ```
 
-🌟 5. Going the Extra Mile (Advanced Features)
+---
+
+## 🌟 5. Going the Extra Mile (Advanced Features)
 To make this project production-ready, the following optional features were implemented:
 CI/CD Pipeline (GitHub Actions): A .github/workflows/daily_pipeline.yml automates the pipeline. It provisions an Ubuntu runner daily, authenticates with GCP via Secrets, installs Bruin, and updates the Data Warehouse without manual intervention.
